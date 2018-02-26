@@ -63,28 +63,21 @@ function createRock(x) {
 
 function endGame() {
   clearInterval(gameInterval)
-
   ROCKS.forEach(function(rock) { rock.remove() })
-
-  document.removeEventListener('keydown', moveDodger)
-
+  window.removeEventListener('keydown', moveDodger)
   START.innerHTML = 'Play again?'
   START.style.display = 'inline'
-
   return alert('YOU LOSE!')
-}
-
+  }
+ 
 function moveDodger(e) {
-  const code = e.which
-
-  if ([LEFT_ARROW, RIGHT_ARROW].indexOf(code) > -1) {
+  if ([LEFT_ARROW, RIGHT_ARROW].indexOf(e.which) > -1) {
     e.preventDefault()
     e.stopPropagation()
-  }
-
-  if (code === LEFT_ARROW) {
-    moveDodgerLeft()
-  } else if (code === RIGHT_ARROW) {
+       }
+  if (e.which === LEFT_ARROW) {
+    moveDodgerLeft() }
+  else if (e.which === RIGHT_ARROW) {
     moveDodgerRight()
   }
 }
@@ -99,10 +92,12 @@ function moveDodgerLeft() {
   })
 }
 
+
+
 function moveDodgerRight() {
   window.requestAnimationFrame(function() {
     const left = positionToInteger(DODGER.style.left)
-
+    
     if (left < 360) {
       DODGER.style.left = `${left + 4}px`;
     }
